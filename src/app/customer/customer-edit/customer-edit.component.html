@@ -1,0 +1,100 @@
+<div class="card mt-5">  
+    <div class="card-header">  
+      {{pageTitle}}  
+    </div>  
+    
+    <div class="card-body">  
+      <form novalidate [formGroup]="customerForm" (ngSubmit)="saveCustomer()">  
+        <div class="col-md-7 mt-1 mb-3">
+          <img *ngIf="!customer.imgUrl" src="assets/avatar.png" alt="profile picture" class="avatar"> 
+          <img *ngIf="customer.imgUrl" [src]="createImgPath(customer.imgUrl!)" alt="profile picture" class="avatar">
+        </div>
+        <div class="form-group row mb-2">  
+          <label class="col-md-3 col-form-label"  
+                 for="customerFirstNameId">Name</label>  
+          <div class="col-md-7">  
+            <input class="form-control"  
+                   id="customerFirstNameId"  
+                   type="text"  
+                   placeholder="First Name (required)"  
+                   formControlName="firstname"  
+                   [ngClass]="{'is-invalid': displayMessage.firstName }" />  
+            <span class="invalid-feedback">  
+              {{displayMessage.firstName}}  
+            </span>  
+          </div>  
+        </div>  
+    
+        <div class="form-group row mb-2">  
+          <label class="col-md-3 col-form-label"  
+                 for="lastnameId">Last Name</label>  
+          <div class="col-md-7">  
+            <input class="form-control"  
+                   id="lastnameid"  
+                   type="text"  
+                   placeholder="Last Name (required)"  
+                   formControlName="lastname"  
+                   [ngClass]="{'is-invalid': displayMessage.lastName}" />  
+            <span class="invalid-feedback">  
+              {{displayMessage.lastName}}  
+            </span>  
+          </div>  
+        </div>  
+    
+        <div class="form-group row mb-2">  
+          <label class="col-md-3 col-form-label"  
+                 for="emailId">Email</label>  
+          <div class="col-md-7">  
+            <input class="form-control"  
+                   id="emailId"  
+                   type="email"  
+                   placeholder="Email"  
+                   formControlName="email" />  
+          </div>  
+        </div>  
+    
+        <div class="form-group row mb-2">  
+          <label class="col-md-3 col-form-label"  
+                 for="imgUrlId">Image Url</label>
+          <div class="col-md-7">
+            <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>   
+            <input class="form-control"  
+                   id="imgUrlId"  
+                   type="hidden"  
+                   formControlName="imgUrl" />                    
+          </div>
+          </div>  
+ 
+    
+        <div class="form-group row mb-2">  
+          <div class="offset-md-2 col-md-6">  
+            <button class="btn btn-primary mr-3"  
+                    style="width:80px;"  
+                    type="submit"  
+                    [title]="customerForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"  
+                    [disabled]="!customerForm.valid">  
+              Save  
+            </button>  
+            <button class="btn btn-outline-secondary mr-3"  
+                    style="width:80px;"  
+                    type="button"  
+                    title="Cancel your edits"  
+                    [routerLink]="['/customer']">  
+              Cancel  
+            </button>  
+            <button class="btn btn-outline-danger" *ngIf="pageTitle != 'Add Customer'"  
+                    style="width:80px"  
+                    type="button"  
+                    title="Delete this customer"  
+                    (click)="deleteCustomer()">  
+              Delete  
+            </button>  
+          </div>  
+        </div>  
+      </form>  
+    </div>  
+    
+    <div class="alert alert-danger"  
+         *ngIf="errorMessage">{{errorMessage}}  
+    </div>  
+  </div> 

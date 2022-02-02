@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-4">
+            <div class="input-group">
+                <input type="text" class="form-control" aria-label="Search for customer" 
+                name="searchText" [(ngModel)]="searchText" placeholder="Search by name, family or email">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="button" (click)="search()">Search</button>
+                  </div>
+              </div>
+        </div>
+        <div class="col-8 text-right">
+            <button class="btn btn-primary mr-3" [routerLink]="['/customer/0/edit']">
+                New Customer
+            </button>
+        </div>
+    </div>
+    <hr />
+    <p *ngIf="!customers"><em>Loading...</em></p>
+    <div class="row" *ngIf="customers">
+        <div class="col-12">
+            <table class="table table-striped ">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let customer of customers">
+                        <td>{{ customer.id }}</td>
+                        <td>{{ customer.firstName }} {{ customer.lastName }}</td>
+                        <td>
+                            <button class="btn btn-link" (click)="showDetails((customer.id)!!)">
+                                Show details
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

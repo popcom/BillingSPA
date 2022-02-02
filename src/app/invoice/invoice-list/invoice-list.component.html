@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-4">
+            <div class="input-group">
+                <input type="text" class="form-control" aria-label="Search for customer" name="searchText"
+                 [(ngModel)]="searchText"  placeholder="Search by name, family or email">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="button" (click)="search()">Search</button>
+                  </div>
+              </div>
+        </div>
+        <div class="col-8 text-right">
+            <button class="btn btn-primary mr-3" [routerLink]="['/invoice/0/edit']">
+                New Invoice
+            </button>
+        </div>
+    </div>
+    <hr />
+    <p *ngIf="!invoices"><em>Loading...</em></p>
+    <div class="row" *ngIf="invoices">
+        <div class="col-12">
+            <table class="table table-striped ">
+                <thead class="table-primary">
+                    <tr>
+                        <!-- <th>Id</th> -->
+                        <th>CustomerName</th>
+                        <th>Amount</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let invoice of invoices">
+                        <!-- <td>{{ invoice.id }}</td> -->
+                        <td>{{ invoice.customerName }}</td>
+                        <td>{{ invoice.amount }}</td>
+                        <td>
+                            <button class="btn btn-link" (click)="showDetails((invoice.id)!!)">
+                                Show details
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

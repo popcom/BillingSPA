@@ -1,0 +1,56 @@
+<div class="card mt-5">  
+    <div class="card-header" *ngIf="customer">  
+        {{pageTitle + ": " + customer.firstName + " " + customer.lastName}}
+    </div>  
+    <div class="card-body"  
+         *ngIf="customer">  
+      <div class="row">  
+        <div class="col-md-8">  
+          <!-- <div class="row">  
+            <div class="col-md-3">ID:</div>  
+            <div class="col-md-6">{{customer.id}}</div>  
+          </div> -->
+          <div class="row mt-1 mb-3">
+            <div class="col-md-3">
+              <img *ngIf="!customer.imgUrl" src="assets/avatar.png" alt="profile picture" class="avatar"> 
+              <img *ngIf="customer.imgUrl" [src]="createImgPath(customer.imgUrl!)" alt="profile picture" class="avatar">
+            </div>
+          </div>
+          <div class="row">  
+            <div class="col-md-3">Name:</div>  
+            <div class="col-md-6">{{customer.firstName}}</div>  
+          </div>  
+          <div class="row">  
+            <div class="col-md-3">Last Name:</div>  
+            <div class="col-md-6">{{customer.lastName}}</div>  
+          </div>  
+          <div class="row">  
+            <div class="col-md-3">Email:</div>  
+            <div class="col-md-6">{{customer.email}}</div>  
+          </div>  
+          <!-- <div class="row">  
+            <div class="col-md-3">Image Url:</div>  
+            <div class="col-md-6">{{customer.imgUrl}}</div>  
+          </div>            -->
+        </div>  
+      </div>  
+      <div class="row mt-4">  
+        <div class="col-md-4">  
+          <button class="btn btn-outline-secondary mr-3"  
+                  style="width:80px"  
+                  (click)="onBack()">  
+            <i class="fa fa-chevron-left"></i> Back  
+          </button>  
+          <a class="btn btn-outline-primary"  
+                  style="width:80px"  
+                  [routerLink]="['/customer', customer.id,'edit']">  
+            Edit  
+        </a>  
+        </div>  
+      </div>  
+    </div>  
+    <div class="alert alert-danger"  
+         *ngIf="errorMessage">  
+      {{errorMessage}}  
+    </div>  
+  </div> 
